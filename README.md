@@ -11,6 +11,3 @@ El lenguaje de codificación es **'Python'**. La obtención de la información s
 3. **'SNS Topic'** es donde se envía la información y queda disponible para otros procesos. 
 
 Todo corriendo dentro de un **'Docker'** containers para brindar una capa de abstracción y siguiendo con el modelo de micro-servicio.
-
-
-
