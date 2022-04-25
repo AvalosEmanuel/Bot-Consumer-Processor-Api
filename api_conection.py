@@ -1,3 +1,4 @@
+from datetime import datetime
 import api_secret
 import websocket
 import json
@@ -87,8 +88,16 @@ class ApiConection:
         except Exception as e:
             print("Error in cloudwatch logs.. 'on_error'.." + str(e))
 
+    def on_ping(wsapp, message):
+        print(f'{str(datetime.now())}   ### Got a Ping! ###')
+
+
+    def on_pong(wsapp, message):
+        print(f'{str(datetime.now())}   ### Send a Pong! ###')
+    
+    
     ws = websocket.WebSocketApp(API_ALCHEMY, on_open=on_open, on_close=on_close, on_message=on_message, on_error=on_error)
-    connection_status = ws.run_forever(sslopt={"cert_reqs": ssl.CERT_NONE})
+    connection_status = ws.run_forever(sslopt={"cert_reqs": ssl.CERT_NONE}, ping_interval=60, ping_timeout=30)
     if connection_status == False:
         update_cloudwatch("< Websocket connection stopped >")
         
