@@ -89,11 +89,11 @@ class ApiConection:
             print("Error in cloudwatch logs.. 'on_error'.." + str(e))
 
     def on_ping(wsapp, message):
-        print(f'{str(datetime.now())}   ### Got a Ping! ###')
+        update_cloudwatch(f'{str(datetime.now())}   ### Got a Ping! ###')
 
 
     def on_pong(wsapp, message):
-        print(f'{str(datetime.now())}   ### Send a Pong! ###')
+        update_cloudwatch(f'{str(datetime.now())}   ### Send a Pong! ###')
     
     
     ws = websocket.WebSocketApp(API_ALCHEMY, 
