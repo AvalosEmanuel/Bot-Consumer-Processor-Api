@@ -96,7 +96,13 @@ class ApiConection:
         print(f'{str(datetime.now())}   ### Send a Pong! ###')
     
     
-    ws = websocket.WebSocketApp(API_ALCHEMY, on_open=on_open, on_close=on_close, on_message=on_message, on_error=on_error)
+    ws = websocket.WebSocketApp(API_ALCHEMY, 
+                                on_open=on_open, 
+                                on_close=on_close, 
+                                on_message=on_message, 
+                                on_error=on_error, 
+                                on_ping=on_ping,
+                                on_pong=on_pong)
     connection_status = ws.run_forever(sslopt={"cert_reqs": ssl.CERT_NONE}, ping_interval=60, ping_timeout=30)
     if connection_status == False:
         update_cloudwatch("< Websocket connection stopped >")
