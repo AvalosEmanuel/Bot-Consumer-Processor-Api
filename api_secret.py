@@ -4,7 +4,6 @@ import boto3
 from botocore.exceptions import ClientError
 from send_logs import update_cloudwatch
 
-
 def get_secret():
     "Retrieves the API_KEY required for connection to the Alchemy node"
     secret_name = "Alchemy_Key"
@@ -26,7 +25,6 @@ def get_secret():
             update_cloudwatch('DecryptionFailureException')
             raise e
             
-
         elif e.response['Error']['Code'] == 'InternalServiceErrorException':
             logging.error('InternalServiceErrorException')
             update_cloudwatch('InternalServiceErrorException')
@@ -48,11 +46,7 @@ def get_secret():
 
     else:
         if 'SecretString' in get_secret_value_response:
-            secret = get_secret_value_response['SecretString']
-        
+            secret = get_secret_value_response['SecretString'] 
+
     alchemy_api_key = json.loads(secret)
     return alchemy_api_key['AlchemyKey']
-
-    
-
-
